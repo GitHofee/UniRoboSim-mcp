@@ -20,9 +20,9 @@ def _configure_full_scene(control: SimulationControl, session_id: str, lease_id:
             "box-add",
             {
                 "kind": "box",
-                "name": "red_box",
+                "name": "test_body",
                 "size_m": [0.2, 0.2, 0.2],
-                "color_rgba": [1.0, 0.0, 0.0, 1.0],
+                "color_rgba": [0.2, 0.55, 0.9, 1.0],
                 "position_m": [0.0, 0.0, 0.5],
             },
         ),
@@ -86,7 +86,7 @@ def test_full_control_surface_and_typed_reads(tmp_path: Path) -> None:
         session_id,
         lease_id,
         "box-force",
-        {"kind": "rigid_wrench", "entity": "red_box", "force_n": [1.0, 0.0, 0.0]},
+        {"kind": "rigid_wrench", "entity": "test_body", "force_n": [1.0, 0.0, 0.0]},
     )["accepted"]
     assert control.command(
         session_id,
@@ -120,7 +120,7 @@ def test_full_control_surface_and_typed_reads(tmp_path: Path) -> None:
             {
                 "kind": "scene",
                 "scene_kind": "set_pose",
-                "entity": "red_box",
+                "entity": "test_body",
                 "target_pose": {"position_m": [0.1, 0.2, 0.6], "orientation_xyzw": [0.0, 0.0, 0.0, 1.0]},
             },
         )["result"]["status"]
@@ -141,7 +141,7 @@ def test_full_control_surface_and_typed_reads(tmp_path: Path) -> None:
     replay = control.step(session_id, lease_id, "step", 2)
     assert replay["idempotent_replay"] is True
 
-    rigid = control.get_entity(session_id, "red_box", include_values=True, include_contact=True)
+    rigid = control.get_entity(session_id, "test_body", include_values=True, include_contact=True)
     assert rigid["kind"] == "rigid_body"
     assert rigid["state"]["positions_m"]["values_complete"] is False
     articulation = control.get_entity(session_id, "/door", include_values=True)
@@ -156,7 +156,7 @@ def test_full_control_surface_and_typed_reads(tmp_path: Path) -> None:
         "/camera",
         "/cloth",
         "/door",
-        "/red_box",
+        "/test_body",
         "/water",
     }
     screenshot = control.capture_camera(
@@ -383,7 +383,7 @@ def test_scene_drag_transactions_and_command_target_errors(tmp_path: Path) -> No
         {
             "kind": "scene",
             "scene_kind": "drag_begin",
-            "entity": "red_box",
+            "entity": "test_body",
             "drag_id": "drag-1",
             "drag_mode": "kinematic",
             "grab_point_world_m": [0.0, 0.0, 0.5],
@@ -397,7 +397,7 @@ def test_scene_drag_transactions_and_command_target_errors(tmp_path: Path) -> No
         {
             "kind": "scene",
             "scene_kind": "drag_update",
-            "entity": "/red_box",
+            "entity": "/test_body",
             "drag_id": "drag-1",
             "target_pose": {"position_m": [0.2, 0.0, 0.7], "orientation_xyzw": [0.0, 0.0, 0.0, 1.0]},
         },
@@ -407,7 +407,7 @@ def test_scene_drag_transactions_and_command_target_errors(tmp_path: Path) -> No
         session_id,
         lease_id,
         "drag-end-command",
-        {"kind": "scene", "scene_kind": "drag_end", "entity": "red_box", "drag_id": "drag-1"},
+        {"kind": "scene", "scene_kind": "drag_end", "entity": "test_body", "drag_id": "drag-1"},
     )
     assert end["result"]["status"] == "applied"
 
@@ -416,7 +416,7 @@ def test_scene_drag_transactions_and_command_target_errors(tmp_path: Path) -> No
             session_id,
             lease_id,
             "bad-pose",
-            {"kind": "scene", "scene_kind": "set_pose", "entity": "red_box", "target_pose": []},
+            {"kind": "scene", "scene_kind": "set_pose", "entity": "test_body", "target_pose": []},
         )
     for command_id, kind, entity in (
         ("wrong-rigid", "rigid_wrench", "door"),

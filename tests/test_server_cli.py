@@ -106,7 +106,7 @@ def test_every_control_tool_through_real_mcp_client(evidence_root: Path) -> None
             session_id = created.structured_content["session_id"]
             lease_id = created.structured_content["lease_id"]
             for command_id, entity in (
-                ("add-box", {"kind": "box", "name": "box", "color_rgba": [1.0, 0.0, 0.0, 1.0]}),
+                ("add-box", {"kind": "box", "name": "box", "color_rgba": [0.2, 0.55, 0.9, 1.0]}),
                 (
                     "add-camera",
                     {"kind": "camera", "name": "camera", "resolution": [32, 24], "outputs": ["rgb"]},
