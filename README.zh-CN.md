@@ -19,9 +19,9 @@ conda activate unirobosim-mcp
 
 git clone https://github.com/GitHofee/UniRoboSim.git
 git clone https://github.com/GitHofee/UniRoboSim-mcp.git
-git clone https://github.com/GitHofee/UniRoboSim-mujuco.git  # 后端示例
+git clone https://github.com/GitHofee/UniRoboSim-mujoco.git  # 后端示例
 
-python -m pip install ./UniRoboSim ./UniRoboSim-mcp ./UniRoboSim-mujuco
+python -m pip install ./UniRoboSim ./UniRoboSim-mcp ./UniRoboSim-mujoco
 ```
 
 常规部署使用当前 MCP 2.x 运行时。Isaac Lab 3.0 环境需要保留已验证的 Pydantic 与

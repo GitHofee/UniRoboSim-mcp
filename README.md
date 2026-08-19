@@ -19,9 +19,9 @@ conda activate unirobosim-mcp
 
 git clone https://github.com/GitHofee/UniRoboSim.git
 git clone https://github.com/GitHofee/UniRoboSim-mcp.git
-git clone https://github.com/GitHofee/UniRoboSim-mujuco.git  # example backend
+git clone https://github.com/GitHofee/UniRoboSim-mujoco.git  # example backend
 
-python -m pip install ./UniRoboSim ./UniRoboSim-mcp ./UniRoboSim-mujuco
+python -m pip install ./UniRoboSim ./UniRoboSim-mcp ./UniRoboSim-mujoco
 ```
 
 General deployments use the current MCP 2.x runtime. Isaac Lab 3.0 environments retain
