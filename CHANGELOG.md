@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.9.0 - 2026-08-24
+
+- Require UniRoboSim Core `>=0.9.1,<0.10` and align the package release identity with
+  the Core 0.9 line.
+- Encode camera PNG responses through Core 0.9.1's compact `ArrayValue.to_bytes()`
+  path so packed RGB frames are not expanded into Python integer tuples.
+- Verify the complete fake-backend control, evidence-query, real MCP client, lint,
+  type-check, wheel, fresh-target metadata, and fixed-candidate coexistence gates,
+  including all public tools through a visible Isaac Lab 0.9.3 stdio session.
+- Document coexistence with the FastSim 0.1.0a1 and UniRoboSim Isaac Lab 0.9.3
+  candidate wheels without making either package a runtime dependency.
+
 ## 0.7.0 - 2026-08-19
 
 - Upgrade the bounded evidence service to Core `>=0.7.0,<0.8`.

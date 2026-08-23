@@ -269,10 +269,11 @@ def test_asset_allowlist_and_entity_validation(tmp_path: Path) -> None:
 def test_png_encoder_rejects_invalid_data() -> None:
     from unirobosim import ArrayValue
 
-    png, width, height = encode_rgb_png(
-        ArrayValue((1, 1, 2, 3), (255, 0, 0, 0, 255, 0), dtype="uint8"),
-        0,
-    )
+    rgb_bytes = bytes((255, 0, 0, 0, 255, 0))
+    packed = ArrayValue.from_uint8_bytes((1, 1, 2, 3), rgb_bytes)
+    assert packed.is_packed is True
+    assert packed.to_bytes() == rgb_bytes
+    png, width, height = encode_rgb_png(packed, 0)
     assert (width, height) == (2, 1)
     assert png.startswith(b"\x89PNG")
     with pytest.raises(ValueError, match="uint8 shape"):

@@ -1,6 +1,6 @@
 """MCP access to UniRoboSim evidence and explicitly enabled simulation control."""
 
-__version__ = "0.7.0"
+__version__ = "0.9.0"
 
 from .control import ControlAccessError, ControlLimits, Screenshot, SimulationControl
 from .query import query_events, query_primitives, query_reports, summarize_trace

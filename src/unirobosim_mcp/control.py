@@ -148,7 +148,7 @@ def encode_rgb_png(rgb: ArrayValue, environment_index: int) -> tuple[bytes, int,
         raise ValueError("environment_index is outside the camera batch")
     row_bytes = width * 3
     start = environment_index * height * row_bytes
-    raw = bytes(int(value) for value in rgb.values[start : start + height * row_bytes])
+    raw = rgb.to_bytes()[start : start + height * row_bytes]
     scanlines = b"".join(b"\x00" + raw[offset : offset + row_bytes] for offset in range(0, len(raw), row_bytes))
     signature = b"\x89PNG\r\n\x1a\n"
     header = struct.pack(">IIBBBBB", width, height, 8, 2, 0, 0, 0)

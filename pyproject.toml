@@ -4,13 +4,14 @@ build-backend = "hatchling.build"
 
 [project]
 name = "unirobosim-mcp"
-version = "0.7.0"
+version = "0.9.0"
 description = "MCP server for UniRoboSim evidence, state inspection, camera images, and owned-session control"
 readme = "README.md"
 requires-python = ">=3.11,<3.13"
+authors = [{name = "Hofee", email = "lexhofee@gmail.com"}]
 dependencies = [
   "mcp>=1.10.1,<3",
-  "unirobosim>=0.7.0,<0.8",
+  "unirobosim>=0.9.1,<0.10",
 ]
 
 [project.optional-dependencies]
