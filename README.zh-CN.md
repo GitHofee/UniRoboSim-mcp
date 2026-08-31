@@ -2,7 +2,7 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
-`unirobosim-mcp` 0.9 通过 MCP 向兼容 Client 提供 UniRoboSim 证据、仿真状态、后端相机图像和显式启用的仿真控制能力。Server 提供两种部署 Profile：
+`unirobosim-mcp` 0.10 通过 MCP 向兼容 Client 提供 UniRoboSim 证据、仿真状态、后端相机图像和显式启用的仿真控制能力。Server 提供两种部署 Profile：
 
 - **Evidence Profile（默认）：** 对运维方指定 Evidence Root 的有边界只读访问。
 - **Control Profile（显式启用）：** 在 Evidence Tool 基础上，增加对本 Server 创建并持有的仿真会话的 Read 与 Control Tool。
@@ -11,8 +11,8 @@ Server 不会接管其他应用创建的会话。
 
 ## 安装
 
-支持 Python `>=3.11,<3.13`。0.9.0 版本要求 UniRoboSim Core
-`>=0.9.1,<0.10`。Core、本包以及目标后端的 Adapter 应安装在同一环境中。
+支持 Python `>=3.11,<3.13`。0.10.0 版本要求 UniRoboSim Core
+`>=0.10,<0.11`。Core、本包以及目标后端的 Adapter 应安装在同一环境中。
 
 ```bash
 conda create -n unirobosim-mcp python=3.12 pip -y
@@ -26,12 +26,10 @@ python -m pip install ./UniRoboSim ./UniRoboSim-mcp ./UniRoboSim-mujoco
 python -m pip check
 ```
 
-0.9.0 发布门使用固定的 Core 0.9.1 wheel，并验证与 FastSim 0.1.0a1 和
-UniRoboSim Isaac Lab Adapter 0.9.3 候选 wheel 的包共存。MCP 不引入对
-FastSim 或 Adapter 的依赖；它们仍是由应用选择的可选同级包。Core 0.9.0 被
-明确排除，因为紧凑相机帧使用 Core 0.9.1 提供的 `ArrayValue.to_bytes()` API。
-Isaac 候选门使用 MCP 1.10.1，并在可见（`headless=false`）Isaac Lab 会话中
-完成了全部对外 MCP Tool。
+0.10.0 发布门在 Core 0.10.0 上执行 Evidence、持有会话的控制、
+相机编码和真实 MCP Client 测试。MCP 不引入对 FastSim 或仿真器
+Adapter 的依赖；它们仍是由应用选择的可选同级包。紧凑相机帧
+继续使用 Core 的 `ArrayValue.to_bytes()` API，并兼容 Core 0.10 的紧凑数组表示。
 
 常规部署使用当前 MCP 2.x 运行时。Isaac Lab 3.0 环境需要保留已验证的 Pydantic 与
 Uvicorn 版本约束，因此应安装兼容性扩展：

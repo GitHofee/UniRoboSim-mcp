@@ -2,7 +2,7 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
-`unirobosim-mcp` 0.9 exposes UniRoboSim evidence, simulation state, backend camera images, and explicitly enabled simulation control to MCP-compatible clients. The server has two deployment profiles:
+`unirobosim-mcp` 0.10 exposes UniRoboSim evidence, simulation state, backend camera images, and explicitly enabled simulation control to MCP-compatible clients. The server has two deployment profiles:
 
 - **Evidence profile (default):** bounded, read-only access to an operator-selected evidence root.
 - **Control profile (explicit):** Evidence tools plus Read and Control tools for simulator sessions created and owned by this server.
@@ -11,8 +11,8 @@ The server does not attach to sessions created by other applications.
 
 ## Installation
 
-Python `>=3.11,<3.13` is supported. Release 0.9.0 requires UniRoboSim Core
-`>=0.9.1,<0.10`. Install Core, this package, and the adapter required by the selected
+Python `>=3.11,<3.13` is supported. Release 0.10.0 requires UniRoboSim Core
+`>=0.10,<0.11`. Install Core, this package, and the adapter required by the selected
 backend in the same environment.
 
 ```bash
@@ -27,13 +27,11 @@ python -m pip install ./UniRoboSim ./UniRoboSim-mcp ./UniRoboSim-mujoco
 python -m pip check
 ```
 
-The 0.9.0 release gate uses the fixed Core 0.9.1 wheel. It also verifies package
-coexistence with the FastSim 0.1.0a1 and UniRoboSim Isaac Lab adapter 0.9.3 candidate
-wheels. MCP does not add a dependency on FastSim or an adapter; those packages remain
-optional peers selected by the application. Core 0.9.0 is intentionally excluded
-because compact camera frames use the `ArrayValue.to_bytes()` API delivered in 0.9.1.
-The Isaac candidate check used MCP 1.10.1 and completed every published MCP tool
-against a visible (`headless=false`) Isaac Lab session.
+The 0.10.0 release gate runs the evidence, owned-session control, camera encoding,
+and real MCP client suites against Core 0.10.0. MCP does not add a dependency on
+FastSim or a simulator adapter; those packages remain optional peers selected by
+the application. Compact camera frames use Core's `ArrayValue.to_bytes()` API and
+remain compatible with the packed array representation in Core 0.10.
 
 General deployments use the current MCP 2.x runtime. Isaac Lab 3.0 environments retain
 their verified Pydantic and Uvicorn pins, so install the compatibility extra there:

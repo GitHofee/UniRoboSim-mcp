@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.10.0 - 2026-08-31
+
+- Require UniRoboSim Core `>=0.10,<0.11` so the package installed from `main`
+  resolves with the Core 0.10 release line.
+- Verify the complete evidence, owned-session control, camera encoding, and MCP
+  protocol suite against UniRoboSim Core 0.10.0.
+
 ## 0.9.0 - 2026-08-24
 
 - Require UniRoboSim Core `>=0.9.1,<0.10` and align the package release identity with
